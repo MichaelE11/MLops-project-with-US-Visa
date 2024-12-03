@@ -30,3 +30,11 @@ class DataIngestionConfig:
     collection_name:str = DATA_INGESTION_COLLECTION_NAME
     # after ingestion it will generate test.csv and train.csv in artifact seen in artifact_entity
 
+
+@dataclass
+class DataValidationConfig:
+    data_validation_dir: str = os.path.join(training_pipeline_config.artifact_dir, DATA_VALIDATION_DIR_NAME)
+    drift_report_file_path: str = os.path.join(data_validation_dir, DATA_VALIDATION_DRIFT_REPORT_DIR,
+                                               DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
+
+

@@ -2,16 +2,18 @@ import sys
 from US_Visa.exception import USvisaException
 from US_Visa.logger import logging
 from US_Visa.components.data_ingestion import DataIngestion
-#from US_Visa.components.data_validation import DataValidation
+from US_Visa.components.data_validation import DataValidation
 #from US_Visa.components.data_transformation import DataTransformation
 #from US_Visa.components.model_trainer import ModelTrainer
 #from US_Visa.components.model_evaluation import ModelEvaluation
 #from US_Visa.components.model_pusher import ModelPusher
 
 
-from US_Visa.entity.config_entity import DataIngestionConfig
+from US_Visa.entity.config_entity import (DataIngestionConfig, 
+                                          DataValidationConfig)
 
-from US_Visa.entity.artifact_entity import DataIngestionArtifact
+from US_Visa.entity.artifact_entity import (DataIngestionArtifact, 
+                                            DataValidationArtifact)
 
 
 '''from US_Visa.entity.config_entity import (DataIngestionConfig,
@@ -32,8 +34,8 @@ from US_Visa.entity.artifact_entity import (DataIngestionArtifact,
 class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
-        '''self.data_validation_config = DataValidationConfig()
-        self.data_transformation_config = DataTransformationConfig()
+        self.data_validation_config = DataValidationConfig()
+        '''self.data_transformation_config = DataTransformationConfig()
         self.model_trainer_config = ModelTrainerConfig()
         self.model_evaluation_config = ModelEvaluationConfig()
         self.model_pusher_config = ModelPusherConfig()'''
@@ -59,7 +61,7 @@ class TrainPipeline:
         
 
     
-    '''def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
+    def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
         """
         This method of TrainPipeline class is responsible for starting data validation component
         """
@@ -85,7 +87,7 @@ class TrainPipeline:
         
 
 
-    def start_data_transformation(self, data_ingestion_artifact: DataIngestionArtifact, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
+    '''def start_data_transformation(self, data_ingestion_artifact: DataIngestionArtifact, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
         """
         This method of TrainPipeline class is responsible for starting data transformation component
         """
@@ -156,8 +158,8 @@ class TrainPipeline:
         """
         try:
             data_ingestion_artifact = self.start_data_ingestion()
-            '''data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
-            data_transformation_artifact = self.start_data_transformation(
+            data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
+            '''data_transformation_artifact = self.start_data_transformation(
                 data_ingestion_artifact=data_ingestion_artifact, data_validation_artifact=data_validation_artifact)
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
             model_evaluation_artifact = self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact,
