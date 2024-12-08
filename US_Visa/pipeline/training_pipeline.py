@@ -5,34 +5,24 @@ from US_Visa.components.data_ingestion import DataIngestion
 from US_Visa.components.data_validation import DataValidation
 from US_Visa.components.data_transformation import DataTransformation
 from US_Visa.components.model_trainer import ModelTrainer
-#from US_Visa.components.model_evaluation import ModelEvaluation
-#from US_Visa.components.model_pusher import ModelPusher
+from US_Visa.components.model_evaluation import ModelEvaluation
+from US_Visa.components.model_pusher import ModelPusher
 
 
 from US_Visa.entity.config_entity import (DataIngestionConfig, 
                                           DataValidationConfig,
                                           DataTransformationConfig,
-                                          ModelTrainerConfig)
+                                          ModelTrainerConfig,
+                                          ModelEvaluationConfig,
+                                          ModelPusherConfig)
 
 from US_Visa.entity.artifact_entity import (DataIngestionArtifact, 
                                             DataValidationArtifact,
                                             DataTransformationArtifact,
-                                            ModelTrainerArtifact)
-
-
-'''from US_Visa.entity.config_entity import (DataIngestionConfig,
-                                         DataValidationConfig,
-                                         DataTransformationConfig,
-                                         ModelTrainerConfig,
-                                         ModelEvaluationConfig,
-                                         ModelPusherConfig)
-
-from US_Visa.entity.artifact_entity import (DataIngestionArtifact,
-                                            DataValidationArtifact,
-                                            DataTransformationArtifact,
                                             ModelTrainerArtifact,
                                             ModelEvaluationArtifact,
-                                            ModelPusherArtifact)'''
+                                            ModelPusherArtifact)
+
 
 
 class TrainPipeline:
@@ -41,8 +31,8 @@ class TrainPipeline:
         self.data_validation_config = DataValidationConfig()
         self.data_transformation_config = DataTransformationConfig()
         self.model_trainer_config = ModelTrainerConfig()
-        '''self.model_evaluation_config = ModelEvaluationConfig()
-        self.model_pusher_config = ModelPusherConfig()'''
+        self.model_evaluation_config = ModelEvaluationConfig()
+        self.model_pusher_config = ModelPusherConfig()
 
 
     
@@ -122,7 +112,7 @@ class TrainPipeline:
         
     
 
-    '''def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
+    def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
                                model_trainer_artifact: ModelTrainerArtifact) -> ModelEvaluationArtifact:
         """
         This method of TrainPipeline class is responsible for starting modle evaluation
@@ -149,7 +139,7 @@ class TrainPipeline:
             model_pusher_artifact = model_pusher.initiate_model_pusher()
             return model_pusher_artifact
         except Exception as e:
-            raise USvisaException(e, sys)'''
+            raise USvisaException(e, sys)
 
         
         
@@ -166,13 +156,13 @@ class TrainPipeline:
             data_transformation_artifact = self.start_data_transformation(
                 data_ingestion_artifact=data_ingestion_artifact, data_validation_artifact=data_validation_artifact)
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
-            '''model_evaluation_artifact = self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact,
+            model_evaluation_artifact = self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact,
                                                                     model_trainer_artifact=model_trainer_artifact)
             
             if not model_evaluation_artifact.is_model_accepted:
                 logging.info(f"Model not accepted.")
                 return None
-            model_pusher_artifact = self.start_model_pusher(model_evaluation_artifact=model_evaluation_artifact)'''
+            model_pusher_artifact = self.start_model_pusher(model_evaluation_artifact=model_evaluation_artifact)
 
         except Exception as e:
             raise USvisaException(e, sys)

@@ -26,3 +26,11 @@
 - components
 - pipeline
 - Main file
+
+
+
+-export MONGODB_URL="mongodb secrete string"
+
+-export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+
+-export AWS_SECRET_ACCESS_KEY=<AWS_SECRETE_ACCESS_KEY>
